@@ -1,34 +1,22 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { HuespedController } from './huesped.controller.js';
-import { HuespedService } from './huesped.service.js';
+import { AppController } from './app.controller.js';
+import { AppService } from './app.service.js';
 
-describe('HuespedController', () => {
-  let controller: HuespedController;
-
-  // HuespedService falso: el controlador solo debe delegar en el servicio
-  const serviceMock = {
-    listarHuespedes: vi.fn().mockResolvedValue([]),
-    buscarUnHuesped: vi.fn(),
-    crearHuesped: vi.fn(),
-    actualizarHuesped: vi.fn(),
-    desactivarHuesped: vi.fn(),
-  };
+describe('AppController', () => {
+  let appController: AppController;
 
   beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
-      controllers: [HuespedController],
-      providers: [{ provide: HuespedService, useValue: serviceMock }],
+    const app: TestingModule = await Test.createTestingModule({
+      controllers: [AppController],
+      providers: [AppService],
     }).compile();
 
-    controller = module.get<HuespedController>(HuespedController);
+    appController = app.get<AppController>(AppController);
   });
 
-  it('should be defined', () => {
-    expect(controller).toBeDefined();
-  });
-
-  it('listarHuespedes llama al servicio', async () => {
-    await expect(controller.listarHuespedes()).resolves.toEqual([]);
-    expect(serviceMock.listarHuespedes).toHaveBeenCalled();
+  describe('root', () => {
+    it('should return "Hello World!"', () => {
+      expect(appController.getHello()).toBe('Hello World!');
+    });
   });
 });
