@@ -27,8 +27,7 @@ export class HuespedService {
 
   async listarHuespedes(query: ListarHuespedesDto): Promise<Paginado<Huesped>> {
     try {
-      const { page, limit, search } = query;
-      const where: Prisma.HuespedWhereInput = search
+   const { page = 1, limit = 10, search } = query;      const where: Prisma.HuespedWhereInput = search
         ? {
             OR: [
               { nombre_hu: { contains: search, mode: 'insensitive' } },

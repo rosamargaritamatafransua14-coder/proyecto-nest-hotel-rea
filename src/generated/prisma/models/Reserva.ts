@@ -29,7 +29,6 @@ export type AggregateReserva = {
 export type ReservaAvgAggregateOutputType = {
   id_reserva: number | null
   cantidad_personas: number | null
-  id_huesped: number | null
   id_empleado: number | null
   id_est_reserva: number | null
 }
@@ -37,7 +36,6 @@ export type ReservaAvgAggregateOutputType = {
 export type ReservaSumAggregateOutputType = {
   id_reserva: number | null
   cantidad_personas: number | null
-  id_huesped: number | null
   id_empleado: number | null
   id_est_reserva: number | null
 }
@@ -49,7 +47,7 @@ export type ReservaMinAggregateOutputType = {
   fecha_salida: Date | null
   cantidad_personas: number | null
   observaciones: string | null
-  id_huesped: number | null
+  id_huesped: string | null
   id_empleado: number | null
   id_est_reserva: number | null
 }
@@ -61,7 +59,7 @@ export type ReservaMaxAggregateOutputType = {
   fecha_salida: Date | null
   cantidad_personas: number | null
   observaciones: string | null
-  id_huesped: number | null
+  id_huesped: string | null
   id_empleado: number | null
   id_est_reserva: number | null
 }
@@ -83,7 +81,6 @@ export type ReservaCountAggregateOutputType = {
 export type ReservaAvgAggregateInputType = {
   id_reserva?: true
   cantidad_personas?: true
-  id_huesped?: true
   id_empleado?: true
   id_est_reserva?: true
 }
@@ -91,7 +88,6 @@ export type ReservaAvgAggregateInputType = {
 export type ReservaSumAggregateInputType = {
   id_reserva?: true
   cantidad_personas?: true
-  id_huesped?: true
   id_empleado?: true
   id_est_reserva?: true
 }
@@ -226,7 +222,7 @@ export type ReservaGroupByOutputType = {
   fecha_salida: Date
   cantidad_personas: number
   observaciones: string | null
-  id_huesped: number
+  id_huesped: string
   id_empleado: number
   id_est_reserva: number
   _count: ReservaCountAggregateOutputType | null
@@ -261,7 +257,7 @@ export type ReservaWhereInput = {
   fecha_salida?: Prisma.DateTimeFilter<"Reserva"> | Date | string
   cantidad_personas?: Prisma.IntFilter<"Reserva"> | number
   observaciones?: Prisma.StringNullableFilter<"Reserva"> | string | null
-  id_huesped?: Prisma.IntFilter<"Reserva"> | number
+  id_huesped?: Prisma.UuidFilter<"Reserva"> | string
   id_empleado?: Prisma.IntFilter<"Reserva"> | number
   id_est_reserva?: Prisma.IntFilter<"Reserva"> | number
   huesped?: Prisma.XOR<Prisma.HuespedScalarRelationFilter, Prisma.HuespedWhereInput>
@@ -304,7 +300,7 @@ export type ReservaWhereUniqueInput = Prisma.AtLeast<{
   fecha_salida?: Prisma.DateTimeFilter<"Reserva"> | Date | string
   cantidad_personas?: Prisma.IntFilter<"Reserva"> | number
   observaciones?: Prisma.StringNullableFilter<"Reserva"> | string | null
-  id_huesped?: Prisma.IntFilter<"Reserva"> | number
+  id_huesped?: Prisma.UuidFilter<"Reserva"> | string
   id_empleado?: Prisma.IntFilter<"Reserva"> | number
   id_est_reserva?: Prisma.IntFilter<"Reserva"> | number
   huesped?: Prisma.XOR<Prisma.HuespedScalarRelationFilter, Prisma.HuespedWhereInput>
@@ -344,7 +340,7 @@ export type ReservaScalarWhereWithAggregatesInput = {
   fecha_salida?: Prisma.DateTimeWithAggregatesFilter<"Reserva"> | Date | string
   cantidad_personas?: Prisma.IntWithAggregatesFilter<"Reserva"> | number
   observaciones?: Prisma.StringNullableWithAggregatesFilter<"Reserva"> | string | null
-  id_huesped?: Prisma.IntWithAggregatesFilter<"Reserva"> | number
+  id_huesped?: Prisma.UuidWithAggregatesFilter<"Reserva"> | string
   id_empleado?: Prisma.IntWithAggregatesFilter<"Reserva"> | number
   id_est_reserva?: Prisma.IntWithAggregatesFilter<"Reserva"> | number
 }
@@ -372,7 +368,7 @@ export type ReservaUncheckedCreateInput = {
   fecha_salida: Date | string
   cantidad_personas: number
   observaciones?: string | null
-  id_huesped: number
+  id_huesped: string
   id_empleado: number
   id_est_reserva: number
   detalles?: Prisma.DetalleReservaUncheckedCreateNestedManyWithoutReservaInput
@@ -405,7 +401,7 @@ export type ReservaUncheckedUpdateInput = {
   fecha_salida?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   cantidad_personas?: Prisma.IntFieldUpdateOperationsInput | number
   observaciones?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  id_huesped?: Prisma.IntFieldUpdateOperationsInput | number
+  id_huesped?: Prisma.StringFieldUpdateOperationsInput | string
   id_empleado?: Prisma.IntFieldUpdateOperationsInput | number
   id_est_reserva?: Prisma.IntFieldUpdateOperationsInput | number
   detalles?: Prisma.DetalleReservaUncheckedUpdateManyWithoutReservaNestedInput
@@ -422,7 +418,7 @@ export type ReservaCreateManyInput = {
   fecha_salida: Date | string
   cantidad_personas: number
   observaciones?: string | null
-  id_huesped: number
+  id_huesped: string
   id_empleado: number
   id_est_reserva: number
 }
@@ -442,7 +438,7 @@ export type ReservaUncheckedUpdateManyInput = {
   fecha_salida?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   cantidad_personas?: Prisma.IntFieldUpdateOperationsInput | number
   observaciones?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  id_huesped?: Prisma.IntFieldUpdateOperationsInput | number
+  id_huesped?: Prisma.StringFieldUpdateOperationsInput | string
   id_empleado?: Prisma.IntFieldUpdateOperationsInput | number
   id_est_reserva?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -472,7 +468,6 @@ export type ReservaCountOrderByAggregateInput = {
 export type ReservaAvgOrderByAggregateInput = {
   id_reserva?: Prisma.SortOrder
   cantidad_personas?: Prisma.SortOrder
-  id_huesped?: Prisma.SortOrder
   id_empleado?: Prisma.SortOrder
   id_est_reserva?: Prisma.SortOrder
 }
@@ -504,7 +499,6 @@ export type ReservaMinOrderByAggregateInput = {
 export type ReservaSumOrderByAggregateInput = {
   id_reserva?: Prisma.SortOrder
   cantidad_personas?: Prisma.SortOrder
-  id_huesped?: Prisma.SortOrder
   id_empleado?: Prisma.SortOrder
   id_est_reserva?: Prisma.SortOrder
 }
@@ -732,7 +726,7 @@ export type ReservaUncheckedCreateWithoutEmpleadoInput = {
   fecha_salida: Date | string
   cantidad_personas: number
   observaciones?: string | null
-  id_huesped: number
+  id_huesped: string
   id_est_reserva: number
   detalles?: Prisma.DetalleReservaUncheckedCreateNestedManyWithoutReservaInput
   check_ins?: Prisma.CheckInUncheckedCreateNestedManyWithoutReservaInput
@@ -777,7 +771,7 @@ export type ReservaScalarWhereInput = {
   fecha_salida?: Prisma.DateTimeFilter<"Reserva"> | Date | string
   cantidad_personas?: Prisma.IntFilter<"Reserva"> | number
   observaciones?: Prisma.StringNullableFilter<"Reserva"> | string | null
-  id_huesped?: Prisma.IntFilter<"Reserva"> | number
+  id_huesped?: Prisma.UuidFilter<"Reserva"> | string
   id_empleado?: Prisma.IntFilter<"Reserva"> | number
   id_est_reserva?: Prisma.IntFilter<"Reserva"> | number
 }
@@ -861,7 +855,7 @@ export type ReservaUncheckedCreateWithoutEstado_reservaInput = {
   fecha_salida: Date | string
   cantidad_personas: number
   observaciones?: string | null
-  id_huesped: number
+  id_huesped: string
   id_empleado: number
   detalles?: Prisma.DetalleReservaUncheckedCreateNestedManyWithoutReservaInput
   check_ins?: Prisma.CheckInUncheckedCreateNestedManyWithoutReservaInput
@@ -918,7 +912,7 @@ export type ReservaUncheckedCreateWithoutDetallesInput = {
   fecha_salida: Date | string
   cantidad_personas: number
   observaciones?: string | null
-  id_huesped: number
+  id_huesped: string
   id_empleado: number
   id_est_reserva: number
   check_ins?: Prisma.CheckInUncheckedCreateNestedManyWithoutReservaInput
@@ -965,7 +959,7 @@ export type ReservaUncheckedUpdateWithoutDetallesInput = {
   fecha_salida?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   cantidad_personas?: Prisma.IntFieldUpdateOperationsInput | number
   observaciones?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  id_huesped?: Prisma.IntFieldUpdateOperationsInput | number
+  id_huesped?: Prisma.StringFieldUpdateOperationsInput | string
   id_empleado?: Prisma.IntFieldUpdateOperationsInput | number
   id_est_reserva?: Prisma.IntFieldUpdateOperationsInput | number
   check_ins?: Prisma.CheckInUncheckedUpdateManyWithoutReservaNestedInput
@@ -996,7 +990,7 @@ export type ReservaUncheckedCreateWithoutCheck_insInput = {
   fecha_salida: Date | string
   cantidad_personas: number
   observaciones?: string | null
-  id_huesped: number
+  id_huesped: string
   id_empleado: number
   id_est_reserva: number
   detalles?: Prisma.DetalleReservaUncheckedCreateNestedManyWithoutReservaInput
@@ -1043,7 +1037,7 @@ export type ReservaUncheckedUpdateWithoutCheck_insInput = {
   fecha_salida?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   cantidad_personas?: Prisma.IntFieldUpdateOperationsInput | number
   observaciones?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  id_huesped?: Prisma.IntFieldUpdateOperationsInput | number
+  id_huesped?: Prisma.StringFieldUpdateOperationsInput | string
   id_empleado?: Prisma.IntFieldUpdateOperationsInput | number
   id_est_reserva?: Prisma.IntFieldUpdateOperationsInput | number
   detalles?: Prisma.DetalleReservaUncheckedUpdateManyWithoutReservaNestedInput
@@ -1074,7 +1068,7 @@ export type ReservaUncheckedCreateWithoutCheck_outsInput = {
   fecha_salida: Date | string
   cantidad_personas: number
   observaciones?: string | null
-  id_huesped: number
+  id_huesped: string
   id_empleado: number
   id_est_reserva: number
   detalles?: Prisma.DetalleReservaUncheckedCreateNestedManyWithoutReservaInput
@@ -1121,7 +1115,7 @@ export type ReservaUncheckedUpdateWithoutCheck_outsInput = {
   fecha_salida?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   cantidad_personas?: Prisma.IntFieldUpdateOperationsInput | number
   observaciones?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  id_huesped?: Prisma.IntFieldUpdateOperationsInput | number
+  id_huesped?: Prisma.StringFieldUpdateOperationsInput | string
   id_empleado?: Prisma.IntFieldUpdateOperationsInput | number
   id_est_reserva?: Prisma.IntFieldUpdateOperationsInput | number
   detalles?: Prisma.DetalleReservaUncheckedUpdateManyWithoutReservaNestedInput
@@ -1152,7 +1146,7 @@ export type ReservaUncheckedCreateWithoutPagosInput = {
   fecha_salida: Date | string
   cantidad_personas: number
   observaciones?: string | null
-  id_huesped: number
+  id_huesped: string
   id_empleado: number
   id_est_reserva: number
   detalles?: Prisma.DetalleReservaUncheckedCreateNestedManyWithoutReservaInput
@@ -1199,7 +1193,7 @@ export type ReservaUncheckedUpdateWithoutPagosInput = {
   fecha_salida?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   cantidad_personas?: Prisma.IntFieldUpdateOperationsInput | number
   observaciones?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  id_huesped?: Prisma.IntFieldUpdateOperationsInput | number
+  id_huesped?: Prisma.StringFieldUpdateOperationsInput | string
   id_empleado?: Prisma.IntFieldUpdateOperationsInput | number
   id_est_reserva?: Prisma.IntFieldUpdateOperationsInput | number
   detalles?: Prisma.DetalleReservaUncheckedUpdateManyWithoutReservaNestedInput
@@ -1230,7 +1224,7 @@ export type ReservaUncheckedCreateWithoutFacturasInput = {
   fecha_salida: Date | string
   cantidad_personas: number
   observaciones?: string | null
-  id_huesped: number
+  id_huesped: string
   id_empleado: number
   id_est_reserva: number
   detalles?: Prisma.DetalleReservaUncheckedCreateNestedManyWithoutReservaInput
@@ -1277,7 +1271,7 @@ export type ReservaUncheckedUpdateWithoutFacturasInput = {
   fecha_salida?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   cantidad_personas?: Prisma.IntFieldUpdateOperationsInput | number
   observaciones?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  id_huesped?: Prisma.IntFieldUpdateOperationsInput | number
+  id_huesped?: Prisma.StringFieldUpdateOperationsInput | string
   id_empleado?: Prisma.IntFieldUpdateOperationsInput | number
   id_est_reserva?: Prisma.IntFieldUpdateOperationsInput | number
   detalles?: Prisma.DetalleReservaUncheckedUpdateManyWithoutReservaNestedInput
@@ -1293,7 +1287,7 @@ export type ReservaCreateManyEmpleadoInput = {
   fecha_salida: Date | string
   cantidad_personas: number
   observaciones?: string | null
-  id_huesped: number
+  id_huesped: string
   id_est_reserva: number
 }
 
@@ -1319,7 +1313,7 @@ export type ReservaUncheckedUpdateWithoutEmpleadoInput = {
   fecha_salida?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   cantidad_personas?: Prisma.IntFieldUpdateOperationsInput | number
   observaciones?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  id_huesped?: Prisma.IntFieldUpdateOperationsInput | number
+  id_huesped?: Prisma.StringFieldUpdateOperationsInput | string
   id_est_reserva?: Prisma.IntFieldUpdateOperationsInput | number
   detalles?: Prisma.DetalleReservaUncheckedUpdateManyWithoutReservaNestedInput
   check_ins?: Prisma.CheckInUncheckedUpdateManyWithoutReservaNestedInput
@@ -1335,7 +1329,7 @@ export type ReservaUncheckedUpdateManyWithoutEmpleadoInput = {
   fecha_salida?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   cantidad_personas?: Prisma.IntFieldUpdateOperationsInput | number
   observaciones?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  id_huesped?: Prisma.IntFieldUpdateOperationsInput | number
+  id_huesped?: Prisma.StringFieldUpdateOperationsInput | string
   id_est_reserva?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
@@ -1399,7 +1393,7 @@ export type ReservaCreateManyEstado_reservaInput = {
   fecha_salida: Date | string
   cantidad_personas: number
   observaciones?: string | null
-  id_huesped: number
+  id_huesped: string
   id_empleado: number
 }
 
@@ -1425,7 +1419,7 @@ export type ReservaUncheckedUpdateWithoutEstado_reservaInput = {
   fecha_salida?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   cantidad_personas?: Prisma.IntFieldUpdateOperationsInput | number
   observaciones?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  id_huesped?: Prisma.IntFieldUpdateOperationsInput | number
+  id_huesped?: Prisma.StringFieldUpdateOperationsInput | string
   id_empleado?: Prisma.IntFieldUpdateOperationsInput | number
   detalles?: Prisma.DetalleReservaUncheckedUpdateManyWithoutReservaNestedInput
   check_ins?: Prisma.CheckInUncheckedUpdateManyWithoutReservaNestedInput
@@ -1441,7 +1435,7 @@ export type ReservaUncheckedUpdateManyWithoutEstado_reservaInput = {
   fecha_salida?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   cantidad_personas?: Prisma.IntFieldUpdateOperationsInput | number
   observaciones?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  id_huesped?: Prisma.IntFieldUpdateOperationsInput | number
+  id_huesped?: Prisma.StringFieldUpdateOperationsInput | string
   id_empleado?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
@@ -1617,7 +1611,7 @@ export type $ReservaPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     fecha_salida: Date
     cantidad_personas: number
     observaciones: string | null
-    id_huesped: number
+    id_huesped: string
     id_empleado: number
     id_est_reserva: number
   }, ExtArgs["result"]["reserva"]>
@@ -2057,7 +2051,7 @@ export interface ReservaFieldRefs {
   readonly fecha_salida: Prisma.FieldRef<"Reserva", 'DateTime'>
   readonly cantidad_personas: Prisma.FieldRef<"Reserva", 'Int'>
   readonly observaciones: Prisma.FieldRef<"Reserva", 'String'>
-  readonly id_huesped: Prisma.FieldRef<"Reserva", 'Int'>
+  readonly id_huesped: Prisma.FieldRef<"Reserva", 'String'>
   readonly id_empleado: Prisma.FieldRef<"Reserva", 'Int'>
   readonly id_est_reserva: Prisma.FieldRef<"Reserva", 'Int'>
 }

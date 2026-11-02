@@ -20,22 +20,12 @@ export type HuespedModel = runtime.Types.Result.DefaultSelection<Prisma.$Huesped
 
 export type AggregateHuesped = {
   _count: HuespedCountAggregateOutputType | null
-  _avg: HuespedAvgAggregateOutputType | null
-  _sum: HuespedSumAggregateOutputType | null
   _min: HuespedMinAggregateOutputType | null
   _max: HuespedMaxAggregateOutputType | null
 }
 
-export type HuespedAvgAggregateOutputType = {
-  id_huesped: number | null
-}
-
-export type HuespedSumAggregateOutputType = {
-  id_huesped: number | null
-}
-
 export type HuespedMinAggregateOutputType = {
-  id_huesped: number | null
+  id_huesped: string | null
   nombre_hu: string | null
   apellido_hu: string | null
   identificacion_hu: string | null
@@ -48,7 +38,7 @@ export type HuespedMinAggregateOutputType = {
 }
 
 export type HuespedMaxAggregateOutputType = {
-  id_huesped: number | null
+  id_huesped: string | null
   nombre_hu: string | null
   apellido_hu: string | null
   identificacion_hu: string | null
@@ -74,14 +64,6 @@ export type HuespedCountAggregateOutputType = {
   _all: number
 }
 
-
-export type HuespedAvgAggregateInputType = {
-  id_huesped?: true
-}
-
-export type HuespedSumAggregateInputType = {
-  id_huesped?: true
-}
 
 export type HuespedMinAggregateInputType = {
   id_huesped?: true
@@ -161,18 +143,6 @@ export type HuespedAggregateArgs<ExtArgs extends runtime.Types.Extensions.Intern
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
-   * Select which fields to average
-  **/
-  _avg?: HuespedAvgAggregateInputType
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-   * 
-   * Select which fields to sum
-  **/
-  _sum?: HuespedSumAggregateInputType
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-   * 
    * Select which fields to find the minimum value
   **/
   _min?: HuespedMinAggregateInputType
@@ -203,14 +173,12 @@ export type HuespedGroupByArgs<ExtArgs extends runtime.Types.Extensions.Internal
   take?: number
   skip?: number
   _count?: HuespedCountAggregateInputType | true
-  _avg?: HuespedAvgAggregateInputType
-  _sum?: HuespedSumAggregateInputType
   _min?: HuespedMinAggregateInputType
   _max?: HuespedMaxAggregateInputType
 }
 
 export type HuespedGroupByOutputType = {
-  id_huesped: number
+  id_huesped: string
   nombre_hu: string
   apellido_hu: string
   identificacion_hu: string
@@ -221,8 +189,6 @@ export type HuespedGroupByOutputType = {
   fecha_ingreso: Date
   estado: boolean
   _count: HuespedCountAggregateOutputType | null
-  _avg: HuespedAvgAggregateOutputType | null
-  _sum: HuespedSumAggregateOutputType | null
   _min: HuespedMinAggregateOutputType | null
   _max: HuespedMaxAggregateOutputType | null
 }
@@ -246,7 +212,7 @@ export type HuespedWhereInput = {
   AND?: Prisma.HuespedWhereInput | Prisma.HuespedWhereInput[]
   OR?: Prisma.HuespedWhereInput[]
   NOT?: Prisma.HuespedWhereInput | Prisma.HuespedWhereInput[]
-  id_huesped?: Prisma.IntFilter<"Huesped"> | number
+  id_huesped?: Prisma.UuidFilter<"Huesped"> | string
   nombre_hu?: Prisma.StringFilter<"Huesped"> | string
   apellido_hu?: Prisma.StringFilter<"Huesped"> | string
   identificacion_hu?: Prisma.StringFilter<"Huesped"> | string
@@ -274,7 +240,7 @@ export type HuespedOrderByWithRelationInput = {
 }
 
 export type HuespedWhereUniqueInput = Prisma.AtLeast<{
-  id_huesped?: number
+  id_huesped?: string
   identificacion_hu?: string
   correo_hu?: string
   AND?: Prisma.HuespedWhereInput | Prisma.HuespedWhereInput[]
@@ -302,17 +268,15 @@ export type HuespedOrderByWithAggregationInput = {
   fecha_ingreso?: Prisma.SortOrder
   estado?: Prisma.SortOrder
   _count?: Prisma.HuespedCountOrderByAggregateInput
-  _avg?: Prisma.HuespedAvgOrderByAggregateInput
   _max?: Prisma.HuespedMaxOrderByAggregateInput
   _min?: Prisma.HuespedMinOrderByAggregateInput
-  _sum?: Prisma.HuespedSumOrderByAggregateInput
 }
 
 export type HuespedScalarWhereWithAggregatesInput = {
   AND?: Prisma.HuespedScalarWhereWithAggregatesInput | Prisma.HuespedScalarWhereWithAggregatesInput[]
   OR?: Prisma.HuespedScalarWhereWithAggregatesInput[]
   NOT?: Prisma.HuespedScalarWhereWithAggregatesInput | Prisma.HuespedScalarWhereWithAggregatesInput[]
-  id_huesped?: Prisma.IntWithAggregatesFilter<"Huesped"> | number
+  id_huesped?: Prisma.UuidWithAggregatesFilter<"Huesped"> | string
   nombre_hu?: Prisma.StringWithAggregatesFilter<"Huesped"> | string
   apellido_hu?: Prisma.StringWithAggregatesFilter<"Huesped"> | string
   identificacion_hu?: Prisma.StringWithAggregatesFilter<"Huesped"> | string
@@ -325,6 +289,7 @@ export type HuespedScalarWhereWithAggregatesInput = {
 }
 
 export type HuespedCreateInput = {
+  id_huesped?: string
   nombre_hu: string
   apellido_hu: string
   identificacion_hu: string
@@ -338,7 +303,7 @@ export type HuespedCreateInput = {
 }
 
 export type HuespedUncheckedCreateInput = {
-  id_huesped?: number
+  id_huesped?: string
   nombre_hu: string
   apellido_hu: string
   identificacion_hu: string
@@ -352,6 +317,7 @@ export type HuespedUncheckedCreateInput = {
 }
 
 export type HuespedUpdateInput = {
+  id_huesped?: Prisma.StringFieldUpdateOperationsInput | string
   nombre_hu?: Prisma.StringFieldUpdateOperationsInput | string
   apellido_hu?: Prisma.StringFieldUpdateOperationsInput | string
   identificacion_hu?: Prisma.StringFieldUpdateOperationsInput | string
@@ -365,7 +331,7 @@ export type HuespedUpdateInput = {
 }
 
 export type HuespedUncheckedUpdateInput = {
-  id_huesped?: Prisma.IntFieldUpdateOperationsInput | number
+  id_huesped?: Prisma.StringFieldUpdateOperationsInput | string
   nombre_hu?: Prisma.StringFieldUpdateOperationsInput | string
   apellido_hu?: Prisma.StringFieldUpdateOperationsInput | string
   identificacion_hu?: Prisma.StringFieldUpdateOperationsInput | string
@@ -379,7 +345,7 @@ export type HuespedUncheckedUpdateInput = {
 }
 
 export type HuespedCreateManyInput = {
-  id_huesped?: number
+  id_huesped?: string
   nombre_hu: string
   apellido_hu: string
   identificacion_hu: string
@@ -392,6 +358,7 @@ export type HuespedCreateManyInput = {
 }
 
 export type HuespedUpdateManyMutationInput = {
+  id_huesped?: Prisma.StringFieldUpdateOperationsInput | string
   nombre_hu?: Prisma.StringFieldUpdateOperationsInput | string
   apellido_hu?: Prisma.StringFieldUpdateOperationsInput | string
   identificacion_hu?: Prisma.StringFieldUpdateOperationsInput | string
@@ -404,7 +371,7 @@ export type HuespedUpdateManyMutationInput = {
 }
 
 export type HuespedUncheckedUpdateManyInput = {
-  id_huesped?: Prisma.IntFieldUpdateOperationsInput | number
+  id_huesped?: Prisma.StringFieldUpdateOperationsInput | string
   nombre_hu?: Prisma.StringFieldUpdateOperationsInput | string
   apellido_hu?: Prisma.StringFieldUpdateOperationsInput | string
   identificacion_hu?: Prisma.StringFieldUpdateOperationsInput | string
@@ -427,10 +394,6 @@ export type HuespedCountOrderByAggregateInput = {
   nacionalidad_hu?: Prisma.SortOrder
   fecha_ingreso?: Prisma.SortOrder
   estado?: Prisma.SortOrder
-}
-
-export type HuespedAvgOrderByAggregateInput = {
-  id_huesped?: Prisma.SortOrder
 }
 
 export type HuespedMaxOrderByAggregateInput = {
@@ -459,10 +422,6 @@ export type HuespedMinOrderByAggregateInput = {
   estado?: Prisma.SortOrder
 }
 
-export type HuespedSumOrderByAggregateInput = {
-  id_huesped?: Prisma.SortOrder
-}
-
 export type HuespedScalarRelationFilter = {
   is?: Prisma.HuespedWhereInput
   isNot?: Prisma.HuespedWhereInput
@@ -483,6 +442,7 @@ export type HuespedUpdateOneRequiredWithoutReservasNestedInput = {
 }
 
 export type HuespedCreateWithoutReservasInput = {
+  id_huesped?: string
   nombre_hu: string
   apellido_hu: string
   identificacion_hu: string
@@ -495,7 +455,7 @@ export type HuespedCreateWithoutReservasInput = {
 }
 
 export type HuespedUncheckedCreateWithoutReservasInput = {
-  id_huesped?: number
+  id_huesped?: string
   nombre_hu: string
   apellido_hu: string
   identificacion_hu: string
@@ -524,6 +484,7 @@ export type HuespedUpdateToOneWithWhereWithoutReservasInput = {
 }
 
 export type HuespedUpdateWithoutReservasInput = {
+  id_huesped?: Prisma.StringFieldUpdateOperationsInput | string
   nombre_hu?: Prisma.StringFieldUpdateOperationsInput | string
   apellido_hu?: Prisma.StringFieldUpdateOperationsInput | string
   identificacion_hu?: Prisma.StringFieldUpdateOperationsInput | string
@@ -536,7 +497,7 @@ export type HuespedUpdateWithoutReservasInput = {
 }
 
 export type HuespedUncheckedUpdateWithoutReservasInput = {
-  id_huesped?: Prisma.IntFieldUpdateOperationsInput | number
+  id_huesped?: Prisma.StringFieldUpdateOperationsInput | string
   nombre_hu?: Prisma.StringFieldUpdateOperationsInput | string
   apellido_hu?: Prisma.StringFieldUpdateOperationsInput | string
   identificacion_hu?: Prisma.StringFieldUpdateOperationsInput | string
@@ -647,7 +608,7 @@ export type $HuespedPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     reservas: Prisma.$ReservaPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
-    id_huesped: number
+    id_huesped: string
     nombre_hu: string
     apellido_hu: string
     identificacion_hu: string
@@ -1081,7 +1042,7 @@ export interface Prisma__HuespedClient<T, Null = never, ExtArgs extends runtime.
  * Fields of the Huesped model
  */
 export interface HuespedFieldRefs {
-  readonly id_huesped: Prisma.FieldRef<"Huesped", 'Int'>
+  readonly id_huesped: Prisma.FieldRef<"Huesped", 'String'>
   readonly nombre_hu: Prisma.FieldRef<"Huesped", 'String'>
   readonly apellido_hu: Prisma.FieldRef<"Huesped", 'String'>
   readonly identificacion_hu: Prisma.FieldRef<"Huesped", 'String'>
