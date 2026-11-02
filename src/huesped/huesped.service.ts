@@ -1,67 +1,94 @@
-import {
-  ConflictException, Injectable, NotFoundException,
-} from '@nestjs/common';
+import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service.js';
-import { Prisma } from '../generated/prisma/client.js';
-import type { Huesped } from '../generated/prisma/client.js';
+import type { Huesped, Prisma } from '../generated/prisma/client.js';
 import { CreateHuespedDto } from './dto/create-huesped.dto.js';
 import { UpdateHuespedDto } from './dto/update-huesped.dto.js';
+import { ListarHuespedesDto } from './dto/listar-huespedes.dto.js';
+import { handlePrismaError } from '../common/prisma-error.js';
+import { Paginado, paginar } from '../common/paginacion.js';
+import {
+  NOT_FOUND_BY_ID_EXCEPTION,
+  HUESPED_DUPLICADO_EXCEPTION,
+} from '../message/message.js';
 
 @Injectable()
 export class HuespedService {
+  private readonly logger = new Logger(HuespedService.name);
+
   constructor(private readonly prismaService: PrismaService) {}
 
   async crearHuesped(dto: CreateHuespedDto): Promise<Huesped> {
     try {
-      const huesped = await this.prismaService.huesped.create({ data: dto });
+      return await this.prismaService.huesped.create({ data: dto });
+    } catch (error) {
+      handlePrismaError(error, this.logger, 'crearHuesped', HUESPED_DUPLICADO_EXCEPTION);
+    }
+  }
+
+  async listarHuespedes(query: ListarHuespedesDto): Promise<Paginado<Huesped>> {
+    try {
+      const { page, limit, search } = query;
+      const where: Prisma.HuespedWhereInput = search
+        ? {
+            OR: [
+              { nombre_hu: { contains: search, mode: 'insensitive' } },
+              { apellido_hu: { contains: search, mode: 'insensitive' } },
+              { identificacion_hu: { contains: search } },
+            ],
+          }
+        : {};
+
+      const [total, data] = await this.prismaService.$transaction([
+        this.prismaService.huesped.count({ where }),
+        this.prismaService.huesped.findMany({
+          where,
+          skip: (page - 1) * limit,
+          take: limit,
+          orderBy: { apellido_hu: 'asc' },
+        }),
+      ]);
+      return paginar(data, total, page, limit);
+    } catch (error) {
+      handlePrismaError(error, this.logger, 'listarHuespedes');
+    }
+  }
+
+  async buscarUnHuesped(id_huesped: string): Promise<Huesped> {
+    try {
+      const huesped = await this.prismaService.huesped.findUnique({
+        where: { id_huesped },
+      });
+      if (!huesped) {
+        throw new NotFoundException(NOT_FOUND_BY_ID_EXCEPTION('huésped', id_huesped));
+      }
       return huesped;
     } catch (error) {
-      if (
-        error instanceof Prisma.PrismaClientKnownRequestError &&
-        error.code === 'P2002'
-      ) {
-        throw new ConflictException(
-          'Ya existe un huésped con esa identificación o correo.',
-        );
-      }
-      throw error;
+      handlePrismaError(error, this.logger, 'buscarUnHuesped');
     }
   }
 
-  async listarHuespedes(): Promise<Huesped[]> {
-    const huespedes = await this.prismaService.huesped.findMany();
-    return huespedes;
-  }
-
-  async buscarUnHuesped(id_huesped: number): Promise<Huesped> {
-    const huesped = await this.prismaService.huesped.findUnique({
-      where: { id_huesped },
-    });
-    if (!huesped) {
-      throw new NotFoundException(
-        `No se encontró el huésped con el id: ${id_huesped}`,
-      );
+  async actualizarHuesped(id_huesped: string, dto: UpdateHuespedDto): Promise<Huesped> {
+    try {
+      await this.buscarUnHuesped(id_huesped);
+      return await this.prismaService.huesped.update({
+        where: { id_huesped },
+        data: dto,
+      });
+    } catch (error) {
+      handlePrismaError(error, this.logger, 'actualizarHuesped', HUESPED_DUPLICADO_EXCEPTION);
     }
-    return huesped;
-  }
-
-  async actualizarHuesped(
-    id_huesped: number,
-    dto: UpdateHuespedDto,
-  ): Promise<Huesped> {
-    await this.buscarUnHuesped(id_huesped);
-    return this.prismaService.huesped.update({
-      where: { id_huesped },
-      data: dto,
-    });
   }
 
   // Baja lógica: el huésped puede tener reservas, por eso no se borra
-  async desactivarHuesped(id_huesped: number): Promise<Huesped> {
-    await this.buscarUnHuesped(id_huesped);
-    return this.prismaService.huesped.update({
-      where: { id_huesped },
-      data: { estado: false },
-    });
+  async desactivarHuesped(id_huesped: string): Promise<Huesped> {
+    try {
+      await this.buscarUnHuesped(id_huesped);
+      return await this.prismaService.huesped.update({
+        where: { id_huesped },
+        data: { estado: false },
+      });
+    } catch (error) {
+      handlePrismaError(error, this.logger, 'desactivarHuesped');
+    }
   }
 }
