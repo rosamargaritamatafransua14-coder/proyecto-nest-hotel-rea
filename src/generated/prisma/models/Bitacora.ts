@@ -29,13 +29,11 @@ export type AggregateBitacora = {
 export type BitacoraAvgAggregateOutputType = {
   id_bitacora: number | null
   id_usuario: number | null
-  registro_id: number | null
 }
 
 export type BitacoraSumAggregateOutputType = {
   id_bitacora: number | null
   id_usuario: number | null
-  registro_id: number | null
 }
 
 export type BitacoraMinAggregateOutputType = {
@@ -43,7 +41,7 @@ export type BitacoraMinAggregateOutputType = {
   id_usuario: number | null
   accion: string | null
   tabla_afectada: string | null
-  registro_id: number | null
+  registro_id: string | null
   descripcion: string | null
   fecha_hora: Date | null
   ip_equipo: string | null
@@ -54,7 +52,7 @@ export type BitacoraMaxAggregateOutputType = {
   id_usuario: number | null
   accion: string | null
   tabla_afectada: string | null
-  registro_id: number | null
+  registro_id: string | null
   descripcion: string | null
   fecha_hora: Date | null
   ip_equipo: string | null
@@ -76,13 +74,11 @@ export type BitacoraCountAggregateOutputType = {
 export type BitacoraAvgAggregateInputType = {
   id_bitacora?: true
   id_usuario?: true
-  registro_id?: true
 }
 
 export type BitacoraSumAggregateInputType = {
   id_bitacora?: true
   id_usuario?: true
-  registro_id?: true
 }
 
 export type BitacoraMinAggregateInputType = {
@@ -210,7 +206,7 @@ export type BitacoraGroupByOutputType = {
   id_usuario: number
   accion: string
   tabla_afectada: string
-  registro_id: number | null
+  registro_id: string | null
   descripcion: string | null
   fecha_hora: Date
   ip_equipo: string | null
@@ -244,7 +240,7 @@ export type BitacoraWhereInput = {
   id_usuario?: Prisma.IntFilter<"Bitacora"> | number
   accion?: Prisma.StringFilter<"Bitacora"> | string
   tabla_afectada?: Prisma.StringFilter<"Bitacora"> | string
-  registro_id?: Prisma.IntNullableFilter<"Bitacora"> | number | null
+  registro_id?: Prisma.StringNullableFilter<"Bitacora"> | string | null
   descripcion?: Prisma.StringNullableFilter<"Bitacora"> | string | null
   fecha_hora?: Prisma.DateTimeFilter<"Bitacora"> | Date | string
   ip_equipo?: Prisma.StringNullableFilter<"Bitacora"> | string | null
@@ -271,7 +267,7 @@ export type BitacoraWhereUniqueInput = Prisma.AtLeast<{
   id_usuario?: Prisma.IntFilter<"Bitacora"> | number
   accion?: Prisma.StringFilter<"Bitacora"> | string
   tabla_afectada?: Prisma.StringFilter<"Bitacora"> | string
-  registro_id?: Prisma.IntNullableFilter<"Bitacora"> | number | null
+  registro_id?: Prisma.StringNullableFilter<"Bitacora"> | string | null
   descripcion?: Prisma.StringNullableFilter<"Bitacora"> | string | null
   fecha_hora?: Prisma.DateTimeFilter<"Bitacora"> | Date | string
   ip_equipo?: Prisma.StringNullableFilter<"Bitacora"> | string | null
@@ -302,7 +298,7 @@ export type BitacoraScalarWhereWithAggregatesInput = {
   id_usuario?: Prisma.IntWithAggregatesFilter<"Bitacora"> | number
   accion?: Prisma.StringWithAggregatesFilter<"Bitacora"> | string
   tabla_afectada?: Prisma.StringWithAggregatesFilter<"Bitacora"> | string
-  registro_id?: Prisma.IntNullableWithAggregatesFilter<"Bitacora"> | number | null
+  registro_id?: Prisma.StringNullableWithAggregatesFilter<"Bitacora"> | string | null
   descripcion?: Prisma.StringNullableWithAggregatesFilter<"Bitacora"> | string | null
   fecha_hora?: Prisma.DateTimeWithAggregatesFilter<"Bitacora"> | Date | string
   ip_equipo?: Prisma.StringNullableWithAggregatesFilter<"Bitacora"> | string | null
@@ -311,7 +307,7 @@ export type BitacoraScalarWhereWithAggregatesInput = {
 export type BitacoraCreateInput = {
   accion: string
   tabla_afectada: string
-  registro_id?: number | null
+  registro_id?: string | null
   descripcion?: string | null
   fecha_hora?: Date | string
   ip_equipo?: string | null
@@ -323,7 +319,7 @@ export type BitacoraUncheckedCreateInput = {
   id_usuario: number
   accion: string
   tabla_afectada: string
-  registro_id?: number | null
+  registro_id?: string | null
   descripcion?: string | null
   fecha_hora?: Date | string
   ip_equipo?: string | null
@@ -332,7 +328,7 @@ export type BitacoraUncheckedCreateInput = {
 export type BitacoraUpdateInput = {
   accion?: Prisma.StringFieldUpdateOperationsInput | string
   tabla_afectada?: Prisma.StringFieldUpdateOperationsInput | string
-  registro_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  registro_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fecha_hora?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   ip_equipo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -344,7 +340,7 @@ export type BitacoraUncheckedUpdateInput = {
   id_usuario?: Prisma.IntFieldUpdateOperationsInput | number
   accion?: Prisma.StringFieldUpdateOperationsInput | string
   tabla_afectada?: Prisma.StringFieldUpdateOperationsInput | string
-  registro_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  registro_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fecha_hora?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   ip_equipo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -355,7 +351,7 @@ export type BitacoraCreateManyInput = {
   id_usuario: number
   accion: string
   tabla_afectada: string
-  registro_id?: number | null
+  registro_id?: string | null
   descripcion?: string | null
   fecha_hora?: Date | string
   ip_equipo?: string | null
@@ -364,7 +360,7 @@ export type BitacoraCreateManyInput = {
 export type BitacoraUpdateManyMutationInput = {
   accion?: Prisma.StringFieldUpdateOperationsInput | string
   tabla_afectada?: Prisma.StringFieldUpdateOperationsInput | string
-  registro_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  registro_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fecha_hora?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   ip_equipo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -375,7 +371,7 @@ export type BitacoraUncheckedUpdateManyInput = {
   id_usuario?: Prisma.IntFieldUpdateOperationsInput | number
   accion?: Prisma.StringFieldUpdateOperationsInput | string
   tabla_afectada?: Prisma.StringFieldUpdateOperationsInput | string
-  registro_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  registro_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fecha_hora?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   ip_equipo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -405,7 +401,6 @@ export type BitacoraCountOrderByAggregateInput = {
 export type BitacoraAvgOrderByAggregateInput = {
   id_bitacora?: Prisma.SortOrder
   id_usuario?: Prisma.SortOrder
-  registro_id?: Prisma.SortOrder
 }
 
 export type BitacoraMaxOrderByAggregateInput = {
@@ -433,7 +428,6 @@ export type BitacoraMinOrderByAggregateInput = {
 export type BitacoraSumOrderByAggregateInput = {
   id_bitacora?: Prisma.SortOrder
   id_usuario?: Prisma.SortOrder
-  registro_id?: Prisma.SortOrder
 }
 
 export type BitacoraCreateNestedManyWithoutUsuarioInput = {
@@ -478,14 +472,6 @@ export type BitacoraUncheckedUpdateManyWithoutUsuarioNestedInput = {
   deleteMany?: Prisma.BitacoraScalarWhereInput | Prisma.BitacoraScalarWhereInput[]
 }
 
-export type NullableIntFieldUpdateOperationsInput = {
-  set?: number | null
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
-}
-
 export type DateTimeFieldUpdateOperationsInput = {
   set?: Date | string
 }
@@ -493,7 +479,7 @@ export type DateTimeFieldUpdateOperationsInput = {
 export type BitacoraCreateWithoutUsuarioInput = {
   accion: string
   tabla_afectada: string
-  registro_id?: number | null
+  registro_id?: string | null
   descripcion?: string | null
   fecha_hora?: Date | string
   ip_equipo?: string | null
@@ -503,7 +489,7 @@ export type BitacoraUncheckedCreateWithoutUsuarioInput = {
   id_bitacora?: number
   accion: string
   tabla_afectada: string
-  registro_id?: number | null
+  registro_id?: string | null
   descripcion?: string | null
   fecha_hora?: Date | string
   ip_equipo?: string | null
@@ -543,7 +529,7 @@ export type BitacoraScalarWhereInput = {
   id_usuario?: Prisma.IntFilter<"Bitacora"> | number
   accion?: Prisma.StringFilter<"Bitacora"> | string
   tabla_afectada?: Prisma.StringFilter<"Bitacora"> | string
-  registro_id?: Prisma.IntNullableFilter<"Bitacora"> | number | null
+  registro_id?: Prisma.StringNullableFilter<"Bitacora"> | string | null
   descripcion?: Prisma.StringNullableFilter<"Bitacora"> | string | null
   fecha_hora?: Prisma.DateTimeFilter<"Bitacora"> | Date | string
   ip_equipo?: Prisma.StringNullableFilter<"Bitacora"> | string | null
@@ -553,7 +539,7 @@ export type BitacoraCreateManyUsuarioInput = {
   id_bitacora?: number
   accion: string
   tabla_afectada: string
-  registro_id?: number | null
+  registro_id?: string | null
   descripcion?: string | null
   fecha_hora?: Date | string
   ip_equipo?: string | null
@@ -562,7 +548,7 @@ export type BitacoraCreateManyUsuarioInput = {
 export type BitacoraUpdateWithoutUsuarioInput = {
   accion?: Prisma.StringFieldUpdateOperationsInput | string
   tabla_afectada?: Prisma.StringFieldUpdateOperationsInput | string
-  registro_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  registro_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fecha_hora?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   ip_equipo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -572,7 +558,7 @@ export type BitacoraUncheckedUpdateWithoutUsuarioInput = {
   id_bitacora?: Prisma.IntFieldUpdateOperationsInput | number
   accion?: Prisma.StringFieldUpdateOperationsInput | string
   tabla_afectada?: Prisma.StringFieldUpdateOperationsInput | string
-  registro_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  registro_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fecha_hora?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   ip_equipo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -582,7 +568,7 @@ export type BitacoraUncheckedUpdateManyWithoutUsuarioInput = {
   id_bitacora?: Prisma.IntFieldUpdateOperationsInput | number
   accion?: Prisma.StringFieldUpdateOperationsInput | string
   tabla_afectada?: Prisma.StringFieldUpdateOperationsInput | string
-  registro_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  registro_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fecha_hora?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   ip_equipo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -658,7 +644,7 @@ export type $BitacoraPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     id_usuario: number
     accion: string
     tabla_afectada: string
-    registro_id: number | null
+    registro_id: string | null
     descripcion: string | null
     fecha_hora: Date
     ip_equipo: string | null
@@ -1090,7 +1076,7 @@ export interface BitacoraFieldRefs {
   readonly id_usuario: Prisma.FieldRef<"Bitacora", 'Int'>
   readonly accion: Prisma.FieldRef<"Bitacora", 'String'>
   readonly tabla_afectada: Prisma.FieldRef<"Bitacora", 'String'>
-  readonly registro_id: Prisma.FieldRef<"Bitacora", 'Int'>
+  readonly registro_id: Prisma.FieldRef<"Bitacora", 'String'>
   readonly descripcion: Prisma.FieldRef<"Bitacora", 'String'>
   readonly fecha_hora: Prisma.FieldRef<"Bitacora", 'DateTime'>
   readonly ip_equipo: Prisma.FieldRef<"Bitacora", 'String'>
