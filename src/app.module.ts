@@ -11,8 +11,29 @@ import { BitacoraModule } from './bitacora/bitacora.module.js';
 import { AuthModule } from './auth/auth.module.js';
 
 @Module({
-  imports: [ConfigModule.forRoot({ isGlobal: true }), PrismaModule, HuespedModule, PermisoModule, RolModule, UsuarioModule, BitacoraModule, AuthModule],
+  imports: [ConfigModule.forRoot({ isGlobal: true }), PrismaModule, HuespedModule, PermisoModule, RolModule, UsuarioModule, BitacoraModule, AuthModule, HabitacionModule],
   controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule {}
+import { IsOptional, IsString, IsInt, Min } from 'class-validator';
+import { Type } from 'class-transformer';
+import { HabitacionModule } from './habitacion/habitacion.module.js';
+
+export class ListarHabitacionesDto {
+  @IsOptional()
+  @Type(() => Number)
+  @IsInt()
+  @Min(1)
+  page?: number = 1;
+
+  @IsOptional()
+  @Type(() => Number)
+  @IsInt()
+  @Min(1)
+  limit?: number = 10;
+
+  @IsOptional()
+  @IsString()
+  search?: string;
+}
