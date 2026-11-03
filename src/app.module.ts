@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller.js';
 import { AppService } from './app.service.js';
-import { PrismaModule } from './prisma/prisma.module.js';
+import { PrismaModule } from './message/prisma/prisma.module.js';
 import { HuespedModule } from './huesped/huesped.module.js';
 import { PermisoModule } from './permiso/permiso.module.js';
 import { RolModule } from './rol/rol.module.js';
@@ -11,7 +11,7 @@ import { BitacoraModule } from './bitacora/bitacora.module.js';
 import { AuthModule } from './auth/auth.module.js';
 
 @Module({
-  imports: [ConfigModule.forRoot({ isGlobal: true }), PrismaModule, HuespedModule, PermisoModule, RolModule, UsuarioModule, BitacoraModule, AuthModule, HabitacionModule, CargoModule, EmpleadoModule],
+  imports: [ConfigModule.forRoot({ isGlobal: true }), PrismaModule, HuespedModule, PermisoModule, RolModule, UsuarioModule, BitacoraModule, AuthModule, HabitacionModule, CargoModule, EmpleadoModule, PagoModule, FacturaModule],
   controllers: [AppController],
   providers: [AppService],
 })
@@ -21,6 +21,8 @@ import { Type } from 'class-transformer';
 import { HabitacionModule } from './habitacion/habitacion.module.js';
 import { CargoModule } from './cargo/cargo.module.js';
 import { EmpleadoModule } from './empleado/empleado.module.js';
+import { PagoModule } from './pago/pago.module.js';
+import { FacturaModule } from './factura/factura.module.js';
 
 export class ListarHabitacionesDto {
   @IsOptional()
