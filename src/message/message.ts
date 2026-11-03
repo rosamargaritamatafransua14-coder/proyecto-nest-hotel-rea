@@ -22,3 +22,6 @@ export const NOT_FOUND_BY_ID_EXCEPTION = (entidad: string, id: number | string) 
 // Mensajes de cada módulo
 export * from './huesped.message.js';
 export * from './seguridad.message.js';
+export * from './habitacion.message.js';
+export * from './personal.message.js';
+export * from './facturacion.message.js';
