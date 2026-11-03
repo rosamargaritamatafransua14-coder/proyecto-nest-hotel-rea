@@ -11,7 +11,7 @@ import { BitacoraModule } from './bitacora/bitacora.module.js';
 import { AuthModule } from './auth/auth.module.js';
 
 @Module({
-  imports: [ConfigModule.forRoot({ isGlobal: true }), PrismaModule, HuespedModule, PermisoModule, RolModule, UsuarioModule, BitacoraModule, AuthModule, HabitacionModule],
+  imports: [ConfigModule.forRoot({ isGlobal: true }), PrismaModule, HuespedModule, PermisoModule, RolModule, UsuarioModule, BitacoraModule, AuthModule, HabitacionModule, CargoModule, EmpleadoModule],
   controllers: [AppController],
   providers: [AppService],
 })
@@ -19,6 +19,8 @@ export class AppModule {}
 import { IsOptional, IsString, IsInt, Min } from 'class-validator';
 import { Type } from 'class-transformer';
 import { HabitacionModule } from './habitacion/habitacion.module.js';
+import { CargoModule } from './cargo/cargo.module.js';
+import { EmpleadoModule } from './empleado/empleado.module.js';
 
 export class ListarHabitacionesDto {
   @IsOptional()
